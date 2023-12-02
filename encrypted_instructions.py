@@ -3,6 +3,8 @@ import sys
 
 
 def decode(line_command: str) -> str:
+    """Рекурсивным методом расшифровывает
+    сжатые сообщения и возвращает строку с командами. """
     line_decode: str = ''
     i: int = 0
     while i < len(line_command):
@@ -36,3 +38,4 @@ def decode(line_command: str) -> str:
 if __name__ == '__main__':
     commands = sys.stdin.readline().rstrip()
     print(decode(commands))
+
