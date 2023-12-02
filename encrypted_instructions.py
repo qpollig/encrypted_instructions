@@ -1,37 +1,40 @@
 import sys
 
 
-def decode(line_command: str) -> str:
-    line_decode: str = ''
+def decode(commands: str) -> str:
+    result: str = ''
     i: int = 0
-    while i < len(line_command):
-        if line_command[i].isalpha():
-            line_decode += line_command[i]
+
+    while i < len(commands):
+        if commands[i].isalpha():
+            result += commands[i]
             i += 1
-        elif line_command.isdigit():
+        elif commands[i].isdigit():
             count_str: str = ''
-            while line_command.isdigit():
-                count_str += line_command[i]
+            while commands[i].isdigit():
+                count_str += commands[i]
                 i += 1
             count: int = int(count_str)
+
             inner_command: str = ''
             i += 1
-            stack: int = 1
+            len_section: int = 1
 
-            while stack != 0:
-                inner_command += line_command[i]
+            while len_section != 0:
+                inner_command += commands[i]
 
-                if line_command[i] == '[':
-                    stack += 1
-                elif line_command[i] == ']':
-                    stack -= 1
+                if commands[i] == '[':
+                    len_section += 1
+                elif commands[i] == ']':
+                    len_section -= 1
+
                 i += 1
 
             decoded_inner_command = decode(inner_command[:-1])
-            line_decode += decoded_inner_command * count
-    return line_decode
+            result += decoded_inner_command * count
+    return result
 
 
 if __name__ == '__main__':
-    commands = sys.stdin.readline().rstrip()
-    print(decode(commands))
+    short_commands = sys.stdin.readline().rstrip()
+    print(decode(short_commands))
