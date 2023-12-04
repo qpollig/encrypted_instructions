@@ -1,17 +1,16 @@
 # 2 дек 2023, 23:14:11 101268990 OK 51ms 4.25Mb
-import sys
-
-
 def decode(line_command: str) -> str:
-    """Рекурсивным методом расшифровывает
-    сжатые сообщения и возвращает строку с командами. """
+    """
+    Рекурсивным методом расшифровывает
+    сжатые сообщения и возвращает строку с командами.
+    """
     line_decode: str = ''
     i: int = 0
     while i < len(line_command):
         if line_command[i].isalpha():
             line_decode += line_command[i]
             i += 1
-        elif line_command[i].isdigit():
+        else:
             count_str: str = ''
             while line_command[i].isdigit():
                 count_str += line_command[i]
@@ -36,6 +35,6 @@ def decode(line_command: str) -> str:
 
 
 if __name__ == '__main__':
-    commands = sys.stdin.readline().rstrip()
+    commands = str(input())
     print(decode(commands))
 
